@@ -1,20 +1,50 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
-	if 7%2 == 0 {
-		fmt.Println("even")
-	} else {
-		fmt.Println("odd")
+	// basic swithc
+	i := 3
+	fmt.Print("Writ ", i, " as ")
+	switch i {
+	case 1:
+		fmt.Println("one")
+	case 2:
+		fmt.Println("two")
+	case 3:
+		fmt.Println("three")
 	}
+	//multiple expressions and default case 
+	switch time.Now().Weekday() {
+	case time.Saturday, time.Sunday:
+		fmt.Println("it's the weekend")
+	default:
+		fmt.Println("it's a weekday")
+	}
+	//switch without an expression is an alternate way to express if/else logic
+	t := time.Now()
+	switch {
+	case t.Hour() < 12:
+		fmt.Println("it's before noon")
+	default:
+		fmt.Println("it's after noon")
 
-	if num := 21; num < 0 {
-		fmt.Println(num, "is negative")
-	} else if num < 10 {
-		fmt.Println(num, "has 1 digit")
-	} else {
-		fmt.Println(num, "has multiple digits")
 	}
+	whatAmI := func(i interface{}) {
+		switch t := i.(type) {
+		case bool:
+			fmt.Println("i'm a bool")
+		case int:
+			fmt.Println("i'm an int")
+		default:
+			fmt.Printf("Don't know type %T\n", t)
+		}
+	}
+	whatAmI(true)
+	whatAmI(3)
+	whatAmI("hey")
 
 }
